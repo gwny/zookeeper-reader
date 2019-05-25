@@ -118,6 +118,12 @@ public class QuorumPeerMain {
 		}
 	}
 
+	/**
+	 * tianyakee: 集群模式
+	 * 
+	 * @param config
+	 * @throws IOException
+	 */
 	public void runFromConfig(QuorumPeerConfig config) throws IOException {
 		try {
 			ManagedUtil.registerLog4jMBeans();

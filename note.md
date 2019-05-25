@@ -52,4 +52,40 @@ OBSERVER：可以投票，但是不能参加leader选举，可以成为observer�
 
 PurgeTxnLog：
 这个类在zookeeper的服务器上定时运行，用来清理dataDir下的快照文件和dataLogDir目录下的文件，保留最后n个快照文件和对应的日志。
+dataDir下文件命名规则: snapshot.zxid
+dataLogDir下文件命名规则： log.zxid
+
+ZookeerServerMain：
+ZooKeeperServerMain.main(args)，启动单机模式
+
+java并发类CountDownLatch：
+一个用于同步的辅助类，基于JDK中AbstractQueuedSynchronizer类实现，用于一个或多个线程等待其他线程的操作完成。
+原理：初始化设置一个数值count，调用await()方法阻塞线程，调用countDown()方法，count-1，count为0时继续其他操作。
+
+ServerCnxnFactory:
+管理服务端和客户端的连接。有两种实现，分别为NIOServerCnxnFactory和NettyServerCnxnFactory，通过读取系统配置zookeeper.serverCnxnFactory反射实例化对应的类。默认创建NIOServerCnxnFactory.
+
+NIOServerCnxn：
+使用NIO处理服务端和客户端的通信，每个客户端有一个，但只有一个线程在进行通信。主要是doIO()方法。
+
+org.apache.zookeeper.server.ZooKeeperServer：
+实现一个单机版的ZookeeperServer。
+
+Java NIO:
+IO和NIO对比：
+1. IO面向流，NIO面向缓冲区
+2. IO是阻塞的，NIO是不阻塞的
+3. NIO有选择器，IO没有
+NIO三个概念：Channle、Buffer、Selector
+传统阻塞式I/O问题：
+1. 建立连接后，当前线程被挂起，直到有数据达到才唤醒，否则一直占着内存资源，如果需要读取其他连接的数据，必须启动另外的线程。连接数过多的时候，内存资源会被大量消耗。而且大量的线程切换也浪费系统资源。
+
+Channle：
+代表一个可以执行I/O操作的实体，例如硬盘设备、文件，网络套接字等。Channle可以读取数据到缓冲区，也可以将缓冲区的数据写到Channle。
+Buffer:
+capacity：容量    position：指针当前位置     limit：读写边界
+Selector：
+将Channle注册到Selector，Selector调用select()方法等待对应的事件发生（Accept，Connect，Read ，Write）。
+
+
 ```

@@ -55,6 +55,7 @@ public class QuorumPeerConfig {
 	protected String dataLogDir;
 	// tianyakee：每一个时钟周期的毫秒数,zookeeper的基本时间单位
 	protected int tickTime = ZooKeeperServer.DEFAULT_TICK_TIME;
+	// tianyakee：限制客户端的连接数量
 	protected int maxClientCnxns = 60;
 	/** defaults to -1 if not set explicitly */
 	protected int minSessionTimeout = -1;
